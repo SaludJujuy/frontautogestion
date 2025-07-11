@@ -1,0 +1,113 @@
+:host {
+  display: block;
+  padding: 10px;
+  overflow-y: auto;
+  
+  box-sizing: border-box;
+  /*
+  max-height: 100vh;
+  */
+}
+
+.nombre-prestador {
+  position: sticky;
+  top: 0;
+  background-color: white; /* Fondo blanco para que no se mezcle al hacer scroll */
+  padding: 16px 0;
+  text-align: center;
+  font-size: 24px;
+  z-index: 1000;
+}
+
+.contenedor-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.columna-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-width: 300px;
+  max-width: 450px;
+  width: 100%;
+}
+
+.columna-teclado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.buscador-card {
+  padding: 16px;
+  margin: 0;
+  background-color: #eaeff2;
+}
+
+.input-full {
+  width: 100%;
+  font-size: 20px;
+}
+
+.teclado-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+}
+
+.teclado-container button {
+  height: 80px;
+  font-size: 28px;
+  width: 100%;
+}
+
+.aceptar-button {
+  font-size: 24px;
+  margin-top: 16px;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .contenedor-flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .columna-inputs,
+  .columna-teclado {
+    width: 100%;
+    max-width: 90%;
+  }
+
+  .teclado-container {
+    gap: 16px;
+  }
+
+  .teclado-container button {
+    height: 70px;
+    font-size: 24px;
+  }
+
+  .aceptar-button {
+    font-size: 20px;
+    min-height: 60px;
+  }
+}

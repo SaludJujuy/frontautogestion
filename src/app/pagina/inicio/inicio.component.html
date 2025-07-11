@@ -1,0 +1,24 @@
+
+<mat-card class="buscador-card">
+  <div class="text-center">
+    <h1><strong>INGRESE MATRICULA</strong></h1>
+    </div>
+  <mat-form-field appearance="outline" class="input-full">
+    <mat-label>Búsqueda</mat-label>
+    <input matInput [(ngModel)]="busqueda" placeholder="Ingrese numero" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="buscar()">
+    <mat-icon>search</mat-icon> Buscar
+  </button>
+</mat-card>
+
+<div class="teclado-container">
+  <button mat-raised-button *ngFor="let tecla of teclas" (click)="agregarNumero(tecla)">
+    {{ tecla }}
+  </button>
+
+  <button mat-raised-button color="warn" (click)="borrar()">
+    <mat-icon>backspace</mat-icon>
+  </button>
+</div>
