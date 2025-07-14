@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
 import { DatosService } from '../../servicios/transferencia/datos.service';
 import { Router } from '@angular/router';
+import { PrestadorService } from 'src/app/servicios/prestador/prestador.service';
 
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css']
 })
+
 export class InicioComponent {
   busqueda: string = '';
   teclas: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+  mensajeError: string = '';
 
-  constructor(private datosService: DatosService, private router: Router) {
+  constructor(private datosService: DatosService, private router: Router, _http: PrestadorService) {
     
   }
 

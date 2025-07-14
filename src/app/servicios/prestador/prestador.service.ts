@@ -7,15 +7,14 @@ import { Observable, of } from 'rxjs';
 })
 export class PrestadorService {
   urlBase: string = "http://10.0.0.19:3000/";
+  urlBasePrueba: string = "http://192.168.0.104:8000/";
   entidad: string = "prestador";
 
   constructor(private _http: HttpClient) { 
 
   }
 
-  buscar_prestador(busqueda: number): Observable<any> {
-  
-    
+  buscar_prestador(busqueda: number): Observable<any> {  
     try {
       const httpOptions = {
         headers: new HttpHeaders({
@@ -26,7 +25,8 @@ export class PrestadorService {
         })
       };
 
-      const url = `${this.urlBase}${this.entidad}/buscar?matricula=${busqueda}`;
+      const url = `${this.urlBasePrueba}${this.entidad}/prueba/buscar?matricula=${busqueda}`;
+      console.log(url);
       return this._http.get(url, httpOptions);
       
     } catch (error) {
