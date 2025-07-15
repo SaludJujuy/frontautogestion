@@ -1,7 +1,8 @@
 export class Prestador {
     public Nombre: string;
-    
-    constructor(nombre: string) {
+    public id: number;
+    constructor(id:number,nombre: string) {
+        this.id = id;
         this.Nombre = nombre;
     }
 
