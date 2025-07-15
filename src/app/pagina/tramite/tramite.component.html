@@ -3,9 +3,9 @@
 </button>
 
 <div class="nombre-prestador">
-  <h1 *ngIf="prest?.Nombre"><strong>{{ prest.Nombre }}</strong></h1>
+  <h1 *ngIf="prestadorElegido?.Nombre"><strong>{{ prestadorElegido.Nombre }}</strong></h1>
 </div>
-<!--
+
 <div class="contenedor-flex">
   
   <div class="columna-inputs">
@@ -52,7 +52,7 @@
         {{ tecla }}
       </button>
 
-      <button mat-raised-button color="primary" (click)="registrarTramite()">
+      <button mat-raised-button color="primary" >
         <mat-icon>keyboard_return</mat-icon>
       </button>
 
@@ -62,35 +62,3 @@
     </div>
   </div>
 </div>
--->
-<!-- Lista de Prestadores (como tarjeta) -->
-<mat-card class="buscador-card">
-  <div class="text-center">
-    <h1><strong>PRESTADORES ENCONTRADOS</strong></h1>
-  </div>
-  <table class="tabla-prestadores">
-    <thead>
-      <tr>
-        <th>NRO PRESTADOR</th>
-        <th>MATRICULA</th>
-        <th>Nombre</th>
-        <th>Profesión</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let p of prestadores">
-        <td>{{ p.NroPrestador }}</td>
-        <td>{{ p.Matricula }}</td>
-        <td>{{ p.Nombre }}</td>
-        <td>{{ p.Profesion }}</td>
-        <td>
-          <button mat-button color="primary" (click)="seleccionarPrestador(p)">
-            <strong>ELEGIR</strong>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</mat-card>
-

@@ -7,6 +7,7 @@ import { Tramite } from 'src/app/clases/tramite/tramite';
   providedIn: 'root'
 })
 export class TramiteService {
+  urlBase: string = "http://10.0.0.19:3000/";
   urlBasePrueba: string = "http://192.168.0.104:8000";
   entidad: string = "tramite";
 
@@ -14,7 +15,7 @@ export class TramiteService {
 
   }
 
-  async registrar_tramite(data:any):Promise<any>{
+  registrar_tramite(data:any):Observable<any>{
     // Paso 1: obtener el token CSRF
     console.log(data);
     //this._http.get(`${this.urlBasePrueba}/sanctum/csrf-cookie`, {
@@ -22,7 +23,7 @@ export class TramiteService {
     //});
 
     // Paso 2: enviar el POST con las cookies
-    return this._http.post(`${this.urlBasePrueba}/tramite/prueba/agregar`, data, {
+    return this._http.post(`${this.urlBase}/tramite/agregar`, data, {
       withCredentials: true
     });
 

@@ -111,21 +111,3 @@
     min-height: 60px;
   }
 }
-
-.tabla-prestadores {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
-  margin-top: 10px;
-}
-
-.tabla-prestadores th,
-.tabla-prestadores td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  font-size: 16px;
-}
-
-.tabla-prestadores th {
-  background-color: #f5f5f5;
-}

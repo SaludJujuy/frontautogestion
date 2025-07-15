@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 
 export class PrestadorComponent {
-  prest: Prestador = new Prestador(0,'');
+  prest: Prestador = new Prestador(0, '', 0, '', 0);
   nombre: string = '';
   dato: any;
   prestador: any;
@@ -23,7 +23,8 @@ export class PrestadorComponent {
   practica: string = '';
   campoActivo: string ='';
   teclas: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-  
+  prestadores: Prestador[] = [];
+
   constructor(private cdr: ChangeDetectorRef, public datosService: DatosService, private prestadorService: PrestadorService,private tramiteService: TramiteService, private router: Router) {
     this.dato = this.datosService.getDato();
      this.obtenerDatosPrestador();
@@ -57,10 +58,12 @@ export class PrestadorComponent {
   obtenerDatosPrestador() {
     this.prestadorService.buscar_prestador(this.dato).subscribe(
       (data: any) => {
+        this.prestadores = data;
         this.prest.setNombre(data.Nombre);
         this.prest.id = data.IdPrestador;
         this.cdr.detectChanges(); 
-        console.log('Datos del prestador obtenidos:', this.prest);
+        console.log(this.prestadores);
+        //console.log('Datos del prestador obtenidos:', this.prest);
       },
       (error: any) => {
         console.error('Error al obtener los datos del prestador:', error);
@@ -83,6 +86,11 @@ export class PrestadorComponent {
       console.error('Error al registrar trámite', error);
       alert('Ocurrió un error');
     }
+  }
+
+  seleccionarPrestador(prestador: any) {
+    this.datosService.setPrestador(prestador);
+    this.router.navigate(['/tramite']);
   }
 
   salir() {

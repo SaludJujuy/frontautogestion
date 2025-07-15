@@ -25,7 +25,7 @@ export class PrestadorService {
         })
       };
 
-      const url = `${this.urlBasePrueba}${this.entidad}/prueba/buscar?matricula=${busqueda}`;
+      const url = `${this.urlBase}${this.entidad}/buscar?matricula=${busqueda}`;
       console.log(url);
       return this._http.get(url, httpOptions);
       

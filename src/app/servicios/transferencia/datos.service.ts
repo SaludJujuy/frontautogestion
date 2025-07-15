@@ -22,8 +22,8 @@ export class DatosService {
   getPrestador(): any {
     return this.prestador;
   }
-  getNombrePrestador(): string {
-    return this.prestador ? this.prestador.Nombre : '';
+  setPrestador(prestador: any) {
+    this.prestador = prestador;
   }
 
 

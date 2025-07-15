@@ -15,12 +15,14 @@ import { MatCardModule } from '@angular/material/card';
 import { InicioComponent } from './pagina/inicio/inicio.component';
 import { PrestadorComponent } from './pagina/prestador/prestador.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TramiteComponent } from './pagina/tramite/tramite.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
-    PrestadorComponent
+    PrestadorComponent,
+    TramiteComponent
   ],
   imports: [
     BrowserModule,
