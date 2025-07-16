@@ -18,6 +18,15 @@ export class TramiteService {
   registrar_tramite(data:any):Observable<any>{
     // Paso 1: obtener el token CSRF
     console.log(data);
+    const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4200/', // Especifica el origen permitido
+          'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE', // Métodos permitidos
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        })
+      };
+
     //this._http.get(`${this.urlBasePrueba}/sanctum/csrf-cookie`, {
     //  withCredentials: true
     //});
