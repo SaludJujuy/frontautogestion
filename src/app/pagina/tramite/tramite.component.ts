@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatosService } from 'src/app/servicios/transferencia/datos.service';
 import { TramiteService } from 'src/app/servicios/tramite/tramite.service';
-import * as qz from 'qz-tray';
-+
+
 @Component({
   selector: 'app-tramite',
   templateUrl: './tramite.component.html',
@@ -15,7 +14,7 @@ export class TramiteComponent {
   sobre: string = '';
   consulta: string = '';
   practica: string = '';
-  campoActivo: string = '';
+  campoActivo: string ='';
   teclas: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
   constructor(private router: Router, private datosService: DatosService, private tramiteService: TramiteService) {
     this.prestadorElegido = this.datosService.getPrestador();
@@ -50,24 +49,19 @@ export class TramiteComponent {
     }
 
     try {
-      this.tramiteService.registrar_tramite(datos).subscribe({
-        next: (response) => {
-          if (response.success) {
-            const comprobante = this.generarComprobante(response);
-            this.imprimirFiscal(comprobante);
-            this.router.navigate(['/inicio']);
-          } else {
-            console.error('Error en registro:', response);
-            alert('Error al registrar trámite');
-          }
-        },
-        error: (error) => {
-          console.error('Error al registrar trámite', error);
-          alert('Error al registrar trámite');
-        }
-      });
-      this.router.navigate(['/inicio']);
+      this.tramiteService.registrar_tramite(datos);
       //alert('Trámite registrado correctamente');
+      this.tramiteService.imprimir_tramite(datos).subscribe(
+        (response: any) => {
+          console.log('Impresión del trámite exitosa:', response);
+          alert('Trámite registrado e impreso correctamente');
+        },
+        (error: any) => {
+          console.error('Error al imprimir el trámite:', error);
+          alert('Ocurrió un error al imprimir el trámite');
+        }
+      );
+      this.router.navigate(['/inicio']);
     } catch (error) {
       console.error('Error al registrar trámite', error);
       alert('Ocurrió un error');
@@ -75,44 +69,6 @@ export class TramiteComponent {
   }
 
   salir() {
-    this.router.navigate(['/inicio']);
-  }
-
-  generarComprobante(data: any): string {
-    // Adaptá esto según los datos que te retorne el backend
-    return `
-      ---------------------------
-      TRÁMITE DE AUTOGESTIÓN
-      ---------------------------
-      Prestador: ${this.prestadorElegido.Nombre || 'N/D'}
-      Fecha: ${new Date().toLocaleString()}
-      Nro Sobre: ${this.sobre}
-      Consultas: ${this.consulta}
-      Prácticas: ${this.practica}
-
-      Gracias por su gestión.
-      ---------------------------
-      `;
-  }
-
-  imprimirFiscal(contenido: string) {
-    qz.websocket.connect().then(() => {
-      return qz.printers.find();
-    }).then((printer) => {
-      const config = qz.configs.create(printer);
-      const data = [
-        '\x1B\x40',        // Reset impresora ESC @
-        contenido,
-        '\n\n\n\n\n\n\n\n',
-        '\x1D\x56\x00'     // Corte de papel
-      ];
-      return qz.print(config, data);
-    }).then(() => {
-      qz.websocket.disconnect();
-      console.log('Impresión enviada');
-    }).catch(err => {
-      console.error('Error en impresión fiscal:', err);
-      alert('Error al imprimir en impresora fiscal. ¿Está QZ Tray corriendo?');
-    });
+    this.router.navigate(['/inicio']); 
   }
 }
