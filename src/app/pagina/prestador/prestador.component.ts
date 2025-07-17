@@ -81,6 +81,7 @@ export class PrestadorComponent {
 
     try {
       await this.tramiteService.registrar_tramite(datos);
+      this.router.navigate(['/inicio']);
       //alert('Trámite registrado correctamente');
     } catch (error) {
       console.error('Error al registrar trámite', error);

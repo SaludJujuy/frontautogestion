@@ -7,7 +7,7 @@ import { Tramite } from 'src/app/clases/tramite/tramite';
   providedIn: 'root'
 })
 export class TramiteService {
-  urlBase: string = "http://10.0.0.19:3000/";
+  urlBase: string = "http://10.0.0.19:3000/api";
   urlBasePrueba: string = "http://192.168.0.104:8000";
   entidad: string = "tramite";
 
@@ -26,18 +26,19 @@ export class TramiteService {
           'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         })
       };
-
-    //this._http.get(`${this.urlBasePrueba}/sanctum/csrf-cookie`, {
-    //  withCredentials: true
-    //});
-
     // Paso 2: enviar el POST con las cookies
-    return this._http.post(`${this.urlBase}/tramite/agregar`, data, {
-      withCredentials: true
-    });
+    return this._http.post(`${this.urlBase}/tramite/agregar`, data, httpOptions);
+  }
 
-    //const url = `${this.urlBasePrueba}${this.entidad}/prueba/agregar`;
-
-    //return this._http.post(url,data);
+  imprimir_tramite(data: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://localhost:4200/', // Especifica el origen permitido
+        'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE', // Métodos permitidos
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      })
+    };
+    return this._http.post(`${this.urlBase}/tramite/imprimir`, data, httpOptions);
   }
 }
