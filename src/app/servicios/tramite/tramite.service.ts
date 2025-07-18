@@ -7,7 +7,7 @@ import { Tramite } from 'src/app/clases/tramite/tramite';
   providedIn: 'root'
 })
 export class TramiteService {
-  urlBase: string = "http://10.0.0.19:3000/api";
+  urlBase: string = "http://10.0.0.19:8000/api";
   urlBasePrueba: string = "http://192.168.0.104:8000";
   entidad: string = "tramite";
 
@@ -31,14 +31,16 @@ export class TramiteService {
   }
 
   imprimir_tramite(data: any): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'http://localhost:4200/', // Especifica el origen permitido
-        'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE', // Métodos permitidos
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-      })
-    };
-    return this._http.post(`${this.urlBase}/tramite/imprimir`, data, httpOptions);
+      const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200/',
+      'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    }),
+    responseType: 'text' as 'json' // 👈 Esta línea es clave para que Angular no tire error
+  };
+
+  return this._http.post(`${this.urlBase}/tramite/imprimir`, data, httpOptions);
   }
 }

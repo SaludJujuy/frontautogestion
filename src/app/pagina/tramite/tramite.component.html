@@ -16,7 +16,7 @@
       <mat-form-field appearance="outline" class="input-full">
         <mat-label>Búsqueda</mat-label>
         <input type="number" [(ngModel)]="sobre" matInput placeholder="Ingrese número"
-          (focus)="campoActivo = 'sobre'" />
+          (focus)="campoActivo = 'sobre'"/>
       </mat-form-field>
     </mat-card>
 
@@ -47,7 +47,7 @@
   <div class="columna-teclado">
     <h1 class="text-center">TECLADO NUMÉRICO</h1>
     <div class="teclado-container">
-      <button mat-raised-button style="background-color: rgb(190, 179, 179);" *ngFor="let tecla of teclas"
+      <button mat-raised-button style="background-color: rgb(190, 179, 179 );" *ngFor="let tecla of teclas"
         (click)="agregarNumero(tecla)">
         {{ tecla }}
       </button>

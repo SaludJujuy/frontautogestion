@@ -5,65 +5,6 @@
 <div class="nombre-prestador">
   <h1 *ngIf="prest?.Nombre"><strong>{{ prest.Nombre }}</strong></h1>
 </div>
-<!--
-<div class="contenedor-flex">
-  
-  <div class="columna-inputs">
-    <mat-card class="buscador-card">
-      <div class="text-center">
-        <h1><strong>INGRESE NUMERO DE SOBRE</strong></h1>
-      </div>
-      <mat-form-field appearance="outline" class="input-full">
-        <mat-label>Búsqueda</mat-label>
-        <input type="number" [(ngModel)]="sobre" matInput placeholder="Ingrese número"
-          (focus)="campoActivo = 'sobre'" />
-      </mat-form-field>
-    </mat-card>
-
-    <mat-card class="buscador-card">
-      <div class="text-center">
-        <h1><strong>INGRESE CANTIDAD DE CONSULTAS</strong></h1>
-      </div>
-      <mat-form-field appearance="outline" class="input-full">
-        <mat-label>Búsqueda</mat-label>
-        <input type="number" [(ngModel)]="consulta" matInput placeholder="Ingrese número"
-          (focus)="campoActivo = 'consulta'" />
-      </mat-form-field>
-    </mat-card>
-
-    <mat-card class="buscador-card">
-      <div class="text-center">
-        <h1><strong>INGRESE CANTIDAD DE PRÁCTICAS</strong></h1>
-      </div>
-      <mat-form-field appearance="outline" class="input-full">
-        <mat-label>Búsqueda</mat-label>
-        <input type="number" [(ngModel)]="practica" matInput placeholder="Ingrese número"
-          (focus)="campoActivo = 'practica'" />
-      </mat-form-field>
-    </mat-card>
-  </div>
-
-  
-  <div class="columna-teclado">
-    <h1 class="text-center">TECLADO NUMÉRICO</h1>
-    <div class="teclado-container">
-      <button mat-raised-button style="background-color: rgb(190, 179, 179);" *ngFor="let tecla of teclas"
-        (click)="agregarNumero(tecla)">
-        {{ tecla }}
-      </button>
-
-      <button mat-raised-button color="primary" (click)="registrarTramite()">
-        <mat-icon>keyboard_return</mat-icon>
-      </button>
-
-      <button mat-raised-button color="warn" (click)="borrar()">
-        <mat-icon>backspace</mat-icon>
-      </button>
-    </div>
-  </div>
-</div>
--->
-<!-- Lista de Prestadores (como tarjeta) -->
 <mat-card class="buscador-card">
   <div class="text-center">
     <h1><strong>PRESTADORES ENCONTRADOS</strong></h1>
