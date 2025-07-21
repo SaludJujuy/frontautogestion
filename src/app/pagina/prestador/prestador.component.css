@@ -83,6 +83,27 @@
   max-width: 400px;
 }
 
+.contenedor-logo {
+  width: 250px;
+  height: 160px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.imagen-superior {
+  text-align: center;
+}
+
+.imagen-logo {
+  width: 290px;
+  height: 110px;
+  
+  object-fit: cover;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .contenedor-flex {

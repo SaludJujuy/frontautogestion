@@ -1,23 +1,60 @@
-<mat-card class="buscador-card">
-  <div class="text-center">
-    <h1><strong>INGRESE MATRICULA</strong></h1>
+<div class="contenedor-principal">
+
+  <div class="imagen-superior">
+    <div class="contenedor-logo">
+      <img src="assets/camara.png" alt="Logo" class="imagen-logo" />
     </div>
-  <mat-form-field appearance="outline" class="input-full">
-    <mat-label>Búsqueda</mat-label>
-    <input matInput [(ngModel)]="busqueda" placeholder="Ingrese numero" autofocus/>
-  </mat-form-field>
+  </div>
+  <div class="contenido-doble-columna">
+    <!-- Columna izquierda: Buscador + Teclado -->
+    <div class="columna-izquierda">
+      <mat-card class="buscador-card">
+        <div class="text-center">
+          <h1><strong>INGRESE MATRICULA</strong></h1>
+        </div>
 
-  <button mat-raised-button color="primary" (click)="buscar()">
-    <mat-icon>search</mat-icon> Buscar
-  </button>
-</mat-card>
+        <mat-form-field appearance="outline" class="input-full">
+          <mat-label>Búsqueda</mat-label>
+          <input matInput [(ngModel)]="busqueda" placeholder="Ingrese número" autofocus />
+        </mat-form-field>
 
-<div class="teclado-container">
-  <button mat-raised-button *ngFor="let tecla of teclas" (click)="agregarNumero(tecla)">
-    {{ tecla }}
-  </button>
+        <button mat-raised-button color="primary" (click)="buscar()">
+          <mat-icon>search</mat-icon> Buscar
+        </button>
+      </mat-card>
 
-  <button mat-raised-button color="warn" (click)="borrar()">
-    <mat-icon>backspace</mat-icon>
-  </button>
+      <div class="teclado-container">
+        <button mat-raised-button *ngFor="let tecla of teclas" (click)="agregarNumero(tecla)">
+          {{ tecla }}
+        </button>
+        <button mat-raised-button>
+          
+        </button>
+        <button mat-raised-button color="warn" (click)="borrar()">
+          <mat-icon>backspace</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Columna derecha: Carrusel -->
+    <div class="columna-derecha">
+      <mat-tab-group class="carousel" [(selectedIndex)]="selectedIndex" animationDuration="500ms">
+        <mat-tab>
+          <ng-template matTabContent>
+            <img src="assets/camara.png" alt="Publicidad 1" class="carousel-img" />
+          </ng-template>
+        </mat-tab>
+        <mat-tab>
+          <ng-template matTabContent>
+            <img src="assets/camara1.jpg" alt="Publicidad 2" class="carousel-img" style="height: 500px;"/>
+          </ng-template>
+        </mat-tab>
+        <mat-tab>
+          <ng-template matTabContent>
+            <img src="assets/camara2.jpg" alt="Publicidad 3" class="carousel-img" style="height: 850px;"/>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
 </div>

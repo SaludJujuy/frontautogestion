@@ -7,7 +7,7 @@ import { Tramite } from 'src/app/clases/tramite/tramite';
   providedIn: 'root'
 })
 export class TramiteService {
-  urlBase: string = "http://10.0.0.19:8000/api";
+  urlBase: string = "http://10.0.0.19:3000/api";
   urlBasePrueba: string = "http://192.168.0.104:8000";
   entidad: string = "tramite";
 

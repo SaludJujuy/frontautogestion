@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component , OnInit, OnDestroy } from '@angular/core';
 import { DatosService } from '../../servicios/transferencia/datos.service';
 import { Router } from '@angular/router';
 import { PrestadorService } from 'src/app/servicios/prestador/prestador.service';
@@ -10,9 +10,22 @@ import { PrestadorService } from 'src/app/servicios/prestador/prestador.service'
 })
 
 export class InicioComponent {
+   selectedIndex = 0;
+    private intervalId: any;
+
   busqueda: string = '';
   teclas: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
   mensajeError: string = '';
+
+  ngOnInit(): void {
+    this.intervalId = setInterval(() => {
+      this.selectedIndex = (this.selectedIndex + 1) % 3; // cambia 3 por la cantidad de tabs
+    }, 10000); // rotación cada 4 segundos
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.intervalId);
+  }
 
   constructor(private datosService: DatosService, private router: Router, _http: PrestadorService) {
     

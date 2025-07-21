@@ -96,18 +96,27 @@ export class TramiteComponent {
             <head>
               <title>Comprobante</title>
               <style>
-                @page { size: portrait; }
                 body {
-                  font-family: monospace;
-                  font-size: 12pt;
-                  white-space: pre;
-                  margin: 0;
-                  padding: 10px;
-                }
+                margin: 0;
+                padding: 0;
+              }
+
+              .contenido {
+                font-family: monospace;
+                font-size: 11pt;
+                white-space: pre-wrap;
+                width: auto;
+                height: auto;
+                transform-origin: top left;
+                position: absolute;
+                left: 0;
+              }
               </style>
             </head>
             <body onload="window.focus(); window.print(); setTimeout(() => window.close(), 500);">
-              ${texto.replace(/\n/g, '<br>')}
+              <div class="contenido">
+                ${texto.replace(/\n/g, '<br>')}
+              </div>
             </body>
           </html>
         `);

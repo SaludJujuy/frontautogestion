@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {  MatTabsModule } from '@angular/material/tabs';
 
 import { InicioComponent } from './pagina/inicio/inicio.component';
 import { PrestadorComponent } from './pagina/prestador/prestador.component';
@@ -35,6 +36,7 @@ import { TramiteComponent } from './pagina/tramite/tramite.component';
     MatButtonModule,
     MatIconModule,   
     MatCardModule,
+    MatTabsModule
     
   ],
   providers: [],
