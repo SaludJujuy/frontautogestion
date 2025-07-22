@@ -1,4 +1,4 @@
-import { Component , OnInit, OnDestroy } from '@angular/core';
+import { Component , ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { DatosService } from '../../servicios/transferencia/datos.service';
 import { Router } from '@angular/router';
 import { PrestadorService } from 'src/app/servicios/prestador/prestador.service';
@@ -16,6 +16,15 @@ export class InicioComponent {
   busqueda: string = '';
   teclas: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
   mensajeError: string = '';
+
+  @ViewChild('inputBuscar') inputBuscar!: ElementRef;
+
+  ngAfterViewInit(): void {
+    // Le da un pequeño delay para asegurarse que la vista ya esté cargada completamente
+    setTimeout(() => {
+      this.inputBuscar.nativeElement.focus();
+    });
+  }
 
   ngOnInit(): void {
     this.intervalId = setInterval(() => {

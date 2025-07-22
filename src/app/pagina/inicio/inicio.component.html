@@ -15,7 +15,7 @@
 
         <mat-form-field appearance="outline" class="input-full">
           <mat-label>Búsqueda</mat-label>
-          <input matInput [(ngModel)]="busqueda" placeholder="Ingrese número" autofocus />
+          <input  #inputBuscar matInput [(ngModel)]="busqueda" placeholder="Ingrese número"   (keydown.enter)="buscar()"/>
         </mat-form-field>
 
         <button mat-raised-button color="primary" (click)="buscar()">

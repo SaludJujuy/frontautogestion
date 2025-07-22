@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {  Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatosService } from 'src/app/servicios/transferencia/datos.service';
 import { TramiteService } from 'src/app/servicios/tramite/tramite.service';
@@ -15,6 +15,15 @@ export class TramiteComponent {
   practica: string = '';
   campoActivo: string = '';
   teclas: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+
+   @ViewChild('inputSobre') inputSobre!: ElementRef;
+
+  ngAfterViewInit(): void {
+    // Le da un pequeño delay para asegurarse que la vista ya esté cargada completamente
+    setTimeout(() => {
+      this.inputSobre.nativeElement.focus();
+    });
+  }
 
   constructor(
     private router: Router,
