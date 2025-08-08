@@ -14,9 +14,18 @@
         <h1><strong>INGRESE NUMERO DE SOBRE</strong></h1>
       </div>
       <mat-form-field appearance="outline" class="input-full">
-        <mat-label>Búsqueda</mat-label>
-        <input #inputSobre type="number" [(ngModel)]="sobre" matInput placeholder="Ingrese número"
-          (focus)="campoActivo = 'sobre'"  (keydown.enter)="registrarTramite()" />
+        <mat-label>Número de Sobre</mat-label>
+        <input  #inputSobre type="number"
+       [(ngModel)]="sobre"
+       matInput
+       placeholder="Ingrese número de sobre"
+       (focus)="campoActivo = 'sobre'"
+       (input)="verificarLongitudSobre()"
+       (keydown.enter)="registrarTramite()" 
+       [ngClass]="{'input-error': inputSobreInvalido}"
+        (mousedown)="evitarClick($event)"
+       class="no-click"
+       />
       </mat-form-field>
     </mat-card>
 
@@ -25,9 +34,16 @@
         <h1><strong>INGRESE CANTIDAD DE CONSULTAS</strong></h1>
       </div>
       <mat-form-field appearance="outline" class="input-full">
-        <mat-label>Búsqueda</mat-label>
-        <input type="number" [(ngModel)]="consulta" matInput placeholder="Ingrese número"
-          (focus)="campoActivo = 'consulta'"  (keydown.enter)="registrarTramite()"/>
+        <mat-label></mat-label>
+        <input #inputConsulta type="number"
+       [(ngModel)]="consulta"
+       matInput
+       placeholder="Ingrese cantidad de consultas"
+       (focus)="campoActivo = 'consulta'"
+       (keydown.enter)="registrarTramite()"
+       [ngClass]="{'input-error': inputConsultaInvalido}"
+        (mousedown)="evitarClick($event)"
+       class="no-click"/>
       </mat-form-field>
     </mat-card>
 
@@ -36,9 +52,16 @@
         <h1><strong>INGRESE CANTIDAD DE PRÁCTICAS</strong></h1>
       </div>
       <mat-form-field appearance="outline" class="input-full">
-        <mat-label>Búsqueda</mat-label>
-        <input type="number" [(ngModel)]="practica" matInput placeholder="Ingrese número"
-          (focus)="campoActivo = 'practica'"  (keydown.enter)="registrarTramite()"/>
+        <mat-label></mat-label>
+        <input #inputPractica 
+        type="number" 
+        [(ngModel)]="practica" 
+        matInput placeholder="Ingrese cantidad de prácticas"
+         (focus)="campoActivo = 'practica'"  
+         (keydown.enter)="registrarTramite()"
+         [ngClass]="{'input-error': inputPracticaInvalido}"
+         (mousedown)="evitarClick($event)"
+         class="no-click"/>
       </mat-form-field>
     </mat-card>
   </div>
@@ -47,18 +70,23 @@
   <div class="columna-teclado">
     <h1 class="text-center">TECLADO NUMÉRICO</h1>
     <div class="teclado-container">
+
       <button mat-raised-button style="background-color: rgb(190, 179, 179 );" *ngFor="let tecla of teclas"
-        (click)="agregarNumero(tecla)">
-        {{ tecla }}
-      </button>
+    (click)="agregarNumero(tecla)">
+    {{ tecla }}
+  </button>
 
-      <button mat-raised-button color="primary" (click)="registrarTramite()">
-        <mat-icon>keyboard_return</mat-icon>
-      </button>
+  <button mat-raised-button color="primary" (click)="siguientePaso()" *ngIf="pasoActual < 3">
+    <h1>Siguiente</h1>
+  </button>
 
-      <button mat-raised-button color="warn" (click)="borrar()">
-        <mat-icon>backspace</mat-icon>
-      </button>
+  <button mat-raised-button color="accent" class="aceptar-button" (click)="registrarTramite()" *ngIf="pasoActual === 3">
+    <h1>Imprimir</h1>
+  </button>
+
+  <button mat-raised-button color="warn" (click)="borrar()">
+    borrar
+  </button>
     </div>
   </div>
 </div>

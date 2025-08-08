@@ -111,3 +111,15 @@
     min-height: 60px;
   }
 }
+
+.input-error .mat-form-field-outline {
+  border-color: red !important;
+}
+
+.input-error .mat-form-field-label {
+  color: red !important;
+}
+
+.no-click {
+  pointer-events: none;
+}

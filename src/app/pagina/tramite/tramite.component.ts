@@ -1,4 +1,4 @@
-import {  Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatosService } from 'src/app/servicios/transferencia/datos.service';
 import { TramiteService } from 'src/app/servicios/tramite/tramite.service';
@@ -9,6 +9,10 @@ import { TramiteService } from 'src/app/servicios/tramite/tramite.service';
   styleUrls: ['./tramite.component.css']
 })
 export class TramiteComponent {
+  inputSobreInvalido: boolean = false;
+  inputConsultaInvalido: boolean = false;
+  inputPracticaInvalido: boolean = false;
+  pasoActual: number = 1;
   prestadorElegido: any;
   sobre: string = '';
   consulta: string = '';
@@ -16,12 +20,16 @@ export class TramiteComponent {
   campoActivo: string = '';
   teclas: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
-   @ViewChild('inputSobre') inputSobre!: ElementRef;
+  @ViewChild('inputSobre') inputSobre!: ElementRef;
+  @ViewChild('inputConsulta') inputConsulta!: ElementRef;
+  @ViewChild('inputPractica') inputPractica!: ElementRef;
+
 
   ngAfterViewInit(): void {
     // Le da un pequeño delay para asegurarse que la vista ya esté cargada completamente
     setTimeout(() => {
       this.inputSobre.nativeElement.focus();
+      this.campoActivo = 'sobre';
     });
   }
 
@@ -31,6 +39,28 @@ export class TramiteComponent {
     private tramiteService: TramiteService
   ) {
     this.prestadorElegido = this.datosService.getPrestador();
+  }
+
+  siguientePaso() {
+    if (this.pasoActual === 1) {
+    if (!this.sobre || this.sobre.toString().trim() === '') {
+      this.inputSobreInvalido = true;
+      alert('Debe ingresar el número de sobre');
+      return;
+    }
+    this.inputSobreInvalido = false;
+    this.pasoActual++;
+    setTimeout(() => this.inputConsulta?.nativeElement?.focus(), 0);
+  } else if (this.pasoActual === 2) {
+    if (!this.consulta || this.consulta.toString().trim() === '') {
+      this.inputConsultaInvalido = true;
+      alert('Debe ingresar la cantidad de consultas');
+      return;
+    }
+    this.inputConsultaInvalido = false;
+    this.pasoActual++;
+    setTimeout(() => this.inputPractica?.nativeElement?.focus(), 0);
+  }
   }
 
   agregarNumero(tecla: string) {
@@ -44,16 +74,43 @@ export class TramiteComponent {
   }
 
   borrar() {
-    if (this.campoActivo === 'sobre') {
-      this.sobre = this.sobre.slice(0, -1);
-    } else if (this.campoActivo === 'consulta') {
-      this.consulta = this.consulta.slice(0, -1);
-    } else if (this.campoActivo === 'practica') {
-      this.practica = this.practica.slice(0, -1);
-    }
+    this.sobre = '';
+    this.consulta = '';
+    this.practica = '';
+    this.pasoActual = 1;
+    setTimeout(() => this.inputSobre.nativeElement.focus(), 0);
   }
 
   registrarTramite() {
+    // Validaciones de campos
+    let valido = true;
+
+    if (!this.sobre || this.sobre.toString().trim() === '') {
+      this.inputSobreInvalido = true;
+      valido = false;
+    } else {
+      this.inputSobreInvalido = false;
+    }
+
+    if (!this.consulta || this.consulta.toString().trim() === '') {
+      this.inputConsultaInvalido = true;
+      valido = false;
+    } else {
+      this.inputConsultaInvalido = false;
+    }
+
+    if (!this.practica || this.practica.toString().trim() === '') {
+      this.inputPracticaInvalido = true;
+      valido = false;
+    } else {
+      this.inputPracticaInvalido = false;
+    }
+
+    if (!valido) {
+      alert('Por favor, complete todos los campos antes de registrar el trámite.');
+      return;
+    }
+
     const datos = {
       prestador: this.prestadorElegido.IdPrestador,
       sobre: Number(this.sobre),
@@ -65,15 +122,15 @@ export class TramiteComponent {
       (response: any) => {
         this.tramiteService.imprimir_tramite(datos).subscribe(
           (impresion: any) => {
-            console.log('Datos del trámite para impresión:', impresion);
+
+            //console.log('Datos del trámite para impresión:', impresion);
+            console.log(impresion , impresion.contenido);
             if (impresion) {
               this.imprimirAutomatico(impresion);
-            } else {
-              console.log('Datos del trámite para impresión contenido:', impresion.contenido);
-            
-              alert('No se recibió contenido para imprimir.');
-            }
+              console.log('Impresión automática iniciada');
+            } 
 
+            this.borrar();
             this.router.navigate(['/inicio']);
           },
           (error: any) => {
@@ -142,6 +199,15 @@ export class TramiteComponent {
     }, 2000);
   }
 
+  verificarLongitudSobre() {
+    if (this.sobre && this.sobre.length === 4) {
+      this.inputConsulta.nativeElement.focus();
+      this.campoActivo = 'consulta';
+    }
+  }
+  evitarClick(event: MouseEvent) {
+    event.preventDefault(); // No deja enfocar con click
+  }
   salir() {
     this.router.navigate(['/inicio']);
   }

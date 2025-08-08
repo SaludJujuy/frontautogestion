@@ -1,10 +1,11 @@
 <div class="contenedor-principal">
-
+<!--
   <div class="imagen-superior">
     <div class="contenedor-logo">
       <img src="assets/camara.png" alt="Logo" class="imagen-logo" />
     </div>
   </div>
+-->
   <div class="contenido-doble-columna">
     <!-- Columna izquierda: Buscador + Teclado -->
     <div class="columna-izquierda">
@@ -15,7 +16,7 @@
 
         <mat-form-field appearance="outline" class="input-full">
           <mat-label>Búsqueda</mat-label>
-          <input  #inputBuscar matInput [(ngModel)]="busqueda" placeholder="Ingrese número"   (keydown.enter)="buscar()"/>
+          <input  #inputBuscar matInput [(ngModel)]="busqueda" placeholder="Ingrese número de matricula"   (keydown.enter)="buscar()"/>
         </mat-form-field>
 
         <button mat-raised-button color="primary" (click)="buscar()">
@@ -31,7 +32,7 @@
           
         </button>
         <button mat-raised-button color="warn" (click)="borrar()">
-          <mat-icon>backspace</mat-icon>
+          borrar
         </button>
       </div>
     </div>
